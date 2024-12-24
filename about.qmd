@@ -2,8 +2,4 @@
 title: "About"
 ---
 
-About this site
-
-```{r}
-1 + 1
-```
+This is just a little attribution page for the game. Of course the inspiration for the project is classic [Diplomacy](https://en.wikipedia.org/wiki/Diplomacy_(game) by [Allan B. Calhamer](https://en.wikipedia.org/wiki/Allan_B._Calhamer "Allan B. Calhamer wikipedia article."). The authors of this project, Chicanery, are: Kenny Luong, Adam Sikorski, Tin Skoric, Issac Zheng. Below are some links to us:
