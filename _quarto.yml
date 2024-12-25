@@ -10,7 +10,7 @@ website:
     contents:
       - href: index.qmd
         text: Home
-      - href: wiki/index.qmd
+      - href: wiki.qmd
         section: Tutorial
         contents:
           - wiki/map.qmd
