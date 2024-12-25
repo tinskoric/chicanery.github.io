@@ -11,7 +11,7 @@ The only elements managed by players and residing *on* the map are units---armie
 Buildings act to make small adjustments to gameplay mechanics. Buildings can only be placed during the build phase, and they cost income to purchase *and* AP to place.
 
 | Type | Effect |
-|------------------------------------|------------------------------------|
+|----|----|
 | Fort | Building a fort in a tile (province) simply adds a permanent +1 to defense in that tile. Think of it as having a second army that can take no orders but automatically follows a support-defend order on whatever *friendly* unit is occupying the tile. Unlike the other two buildings, **forts cost replenishment**—equal to the costs of a typical unit. If a defense for a tile is lost and an enemy takes control, the opposing player who has assumed control of the province must pay to replenish the fort. Unlike units, which will simply retreat if left un-replenished, if a fort is left un-replenished for two entire movement phases (Spring and Fall or Fall and Spring) after first needing replenishment, it will be destroyed[^1]. Forts *do not* earn income or AP, and they *do not* contribute to your total number of centers. Ports require replenishment (as detailed) and *are not* destroyed upon the loss of a tile—so long as they are replenished. |
 | Port | Building a port in a tile (province) allows one army and one fleet (or two fleets and no army) to simultaneously occupy the same tile, by effectively creating a sub-tile for the fleet. Since the actual tile continues to hold only a single unit this still counts only as a +1 defense rather than a +2. If the main tile is lost, both units must retreat to their respective adjacent options. Each unit can still operate independently from the province (e.g., they can attack or support different things, **including each other**[^2]). Ports *do not* earn income or AP, and they *do not* contribute to your total number of centers. Ports *do not* require replenishment and *are not* destroyed upon the loss of a tile—ports are only destroyed if you have to destroy them to stay within your building limit. |
 | Supply Hub | In classic Diplomacy, you can only build units in your starting centers... until you build a supply hub! Supply hubs allow you to build units in whichever tile (province) a supply hub is present in. Supply hubs *do not* earn income or AP, and they *do not* contribute to your total number of centers. Supply centers *do not* require replenishment, but **are immediately destroyed upon the loss of the tile**[^3]. |
@@ -33,7 +33,7 @@ Combat for units follows the system of orders outlined in the prior page. Units 
 After each movement phase, units must be *replenished* before being usable in combat for the next phase. The below table details the scenarios or units in a given movement phase, and their subsequent replenishment need in the following retreat phase:
 
 | Action | Replenishment Need |
-|------------------------------------|------------------------------------|
+|----|----|
 | Unit did not engage in combat with an **enemy**[^4] unit (either defensive or offensive!) in the movement phase. | No need. |
 | Unit engaged in **defensive** combat and was **successful**. | Base of 20% replenishment need. |
 | Unit engaged in **defensive** combat and **failed** (must retreat/burn in retreat phase). | **If retreated**: base 70% replenishment need. **If burned**: no need. |

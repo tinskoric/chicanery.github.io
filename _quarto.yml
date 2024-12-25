@@ -10,8 +10,8 @@ website:
     contents:
       - href: index.qmd
         text: Home
-      - href: wiki.qmd
-        section: Tutorial
+      - section: Tutorial
+        href: wiki.qmd
         contents:
           - wiki/map.qmd
           - wiki/orders.qmd
