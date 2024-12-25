@@ -1,5 +1,17 @@
 ---
 title: "About"
+page-navigation: false
 ---
 
-This is just a little attribution page for the game. Of course the inspiration for the project is classic [Diplomacy](https://en.wikipedia.org/wiki/Diplomacy_(game) by [Allan B. Calhamer](https://en.wikipedia.org/wiki/Allan_B._Calhamer "Allan B. Calhamer wikipedia article."). The authors of this project, Chicanery, are: Kenny Luong, Adam Sikorski, Tin Skoric, Issac Zheng. Below are some links to us:
+------------------------------------------------------------------------
+
+This is just a little attribution page for the game. Of course the inspiration for the project is classic \[Diplomacy\](https://en.wikipedia.org/wiki/Diplomacy\_(game) by [Allan B. Calhamer](https://en.wikipedia.org/wiki/Allan_B._Calhamer "Allan B. Calhamer wikipedia article."). The authors of this project, Chicanery, are: Kenny Luong, Adam Sikorski, Tin Skoric, Issac Zheng. Below are some links to us:
+
+| Name | GitHub | LinkedIn | Personal Site |
+|----|----|----|----|
+| Kenny Luong |  |  |  |
+| Adam Sikorski |  |  |  |
+| Tin Skoric | [🚀](https://github.com/tinskoric "Tin's GitHub") | [🕴️](https://www.linkedin.com/in/tinskoric/ "Tin's LinkedIn") | [🔗](https://tins.page/ "Tin's page") |
+| Issac Zheng |  |  |  |
+
+: The Links

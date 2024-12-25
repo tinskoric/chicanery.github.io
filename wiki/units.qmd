@@ -1,0 +1,53 @@
+---
+title: "Units and Buildings"
+---
+
+------------------------------------------------------------------------
+
+The only elements managed by players and residing *on* the map are units---armies and fleets---and buildings---forts, ports, and supply hubs. First, we will cover buildings.
+
+# Buildings
+
+Buildings act to make small adjustments to gameplay mechanics. Buildings can only be placed during the build phase, and they cost income to purchase *and* AP to place.
+
+| Type | Effect |
+|------------------------------------|------------------------------------|
+| Fort | Building a fort in a tile (province) simply adds a permanent +1 to defense in that tile. Think of it as having a second army that can take no orders but automatically follows a support-defend order on whatever *friendly* unit is occupying the tile. Unlike the other two buildings, **forts cost replenishment**—equal to the costs of a typical unit. If a defense for a tile is lost and an enemy takes control, the opposing player who has assumed control of the province must pay to replenish the fort. Unlike units, which will simply retreat if left un-replenished, if a fort is left un-replenished for two entire movement phases (Spring and Fall or Fall and Spring) after first needing replenishment, it will be destroyed[^1]. Forts *do not* earn income or AP, and they *do not* contribute to your total number of centers. Ports require replenishment (as detailed) and *are not* destroyed upon the loss of a tile—so long as they are replenished. |
+| Port | Building a port in a tile (province) allows one army and one fleet (or two fleets and no army) to simultaneously occupy the same tile, by effectively creating a sub-tile for the fleet. Since the actual tile continues to hold only a single unit this still counts only as a +1 defense rather than a +2. If the main tile is lost, both units must retreat to their respective adjacent options. Each unit can still operate independently from the province (e.g., they can attack or support different things, **including each other**[^2]). Ports *do not* earn income or AP, and they *do not* contribute to your total number of centers. Ports *do not* require replenishment and *are not* destroyed upon the loss of a tile—ports are only destroyed if you have to destroy them to stay within your building limit. |
+| Supply Hub | In classic Diplomacy, you can only build units in your starting centers... until you build a supply hub! Supply hubs allow you to build units in whichever tile (province) a supply hub is present in. Supply hubs *do not* earn income or AP, and they *do not* contribute to your total number of centers. Supply centers *do not* require replenishment, but **are immediately destroyed upon the loss of the tile**[^3]. |
+
+: Research Information: Buildings
+
+[^1]: If you bounce your own units, and no one else tries to attack the area you bounced, then that counts as not having engaged in combat with those units—so long as those units weren't attacked otherwise.
+
+[^2]: Pillaging sure is great.
+
+[^3]: Why you would to do this is... a question—but it is a permitted order.
+
+Although these buildings are *not* temporary, there is a limit to the number of buildings you can place according to the total number of provinces you command, and they can be destroyed or lost. If you exceed your limit, then you must delete buildings during the Build phase until you are within your limit.
+
+# Units
+
+Combat for units follows the system of orders outlined in the prior page. Units can only be placed during the build phase, and they cost income to purchase *and* AP to place.
+
+After each movement phase, units must be *replenished* before being usable in combat for the next phase. The below table details the scenarios or units in a given movement phase, and their subsequent replenishment need in the following retreat phase:
+
+| Action | Replenishment Need |
+|------------------------------------|------------------------------------|
+| Unit did not engage in combat with an **enemy**[^4] unit (either defensive or offensive!) in the movement phase. | No need. |
+| Unit engaged in **defensive** combat and was **successful**. | Base of 20% replenishment need. |
+| Unit engaged in **defensive** combat and **failed** (must retreat/burn in retreat phase). | **If retreated**: base 70% replenishment need. **If burned**: no need. |
+| Unit engaged in **offensive** combat and was **successful**. | No need[^5]. |
+| Unit engaged in **offensive** combat and **failed** (didn't take territory). | Base of 50% replenishment need. |
+
+: Unit Replenishment Chart
+
+[^4]: If you bounce your own units, and no one else tries to attack the area you bounced, then that counts as not having engaged in combat with those units—so long as those units weren't attacked otherwise.
+
+[^5]: Pillaging sure is great.
+
+As can be seen, losing a battle over a tile (province) where you are defending is very costly, particularly at the start. **If a unit is not replenished, it will be unusable for combat actions, including for support orders**. An un-replenished unit will not be able to take any orders—no attacks, holds, or supports—*except convoys that would bring it to friendly territory*[^6](cannot be used in convoys for attacking). An un-replenished unit will not hold if attacked, no matter if it is supported or not, and rather will immediately retreat[^7]. Replenishment costs *income* and the costs can be altered by *research*, which segues us nicely into the next sections.
+
+[^6]: Why you would to do this is... a question—but it is a permitted order.
+
+[^7]: Choosing not to replenish a unit is NOT a death sentence for it. It will just keep retreating until you replenish it. It is perfectly viable—if you are okay with losing ground—to save money by not replenishing some units.

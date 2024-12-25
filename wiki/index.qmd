@@ -1,0 +1,7 @@
+---
+title: "Tutorial"
+---
+
+------------------------------------------------------------------------
+
+Chicanery introduces a series of mechanics to support player interaction that can be broadly categorized as relating to player **unit-management**, **economy**, and **research** in game. This short wiki introduces the outline of the game, covering the map and turn elements, things that interact with the map (units and buildings), research trees, and orders for units and the like. There is an additional final section of the wiki covering some tactics for new players.

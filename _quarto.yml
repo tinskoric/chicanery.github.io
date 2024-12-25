@@ -3,15 +3,34 @@ project:
 
 website:
   title: "Chicanery"
-  navbar:
-    left:
+  favicon: icon.png
+  sidebar:
+    style: "docked"
+    search: true
+    contents:
       - href: index.qmd
         text: Home
-      - href: wiki.qmd
-        text: Wiki
+      - href: wiki/index.qmd
+        section: Tutorial
+        contents:
+          - wiki/map.qmd
+          - wiki/orders.qmd
+          - wiki/units.qmd
+          - wiki/research.qmd
+          - wiki/tactics.qmd
       - href: about.qmd
         text: About
-
+  search:
+    location: sidebar
+    type: textbox
+  page-footer:
+    left: "❤️ Chicanery, 2024"
+    right:
+      - icon: github
+        href: https://github.com/tinskoric/chicanery
+  back-to-top-navigation: true
+  page-navigation: true
+      
 format:
   html:
     theme: lumen

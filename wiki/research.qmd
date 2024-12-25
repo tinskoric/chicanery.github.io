@@ -1,0 +1,58 @@
+---
+title: "Research"
+---
+
+------------------------------------------------------------------------
+
+There are two types of research. First there are plain buffs. These buffs center around reductions to the income cost of replenishment, some income bonuses for taking centers, and increases to the amount of AP earned for larger players. All accoutrements must first be researched for a fixed cost of income. After being researched, individual accoutrements must be bought with income (no AP needed for their use!). **Accoutrements are tools for subterfuge and deceit**. In the case of buffs, research functionally just means paying more for a better effect as the research for buffs is reset each turn. For accoutrements, research is a one-time cost—the research is not reset—but accoutrements are one-time use, and must be bought for each use. Below are sections detailing research across the three defined groups.
+
+# Buffs
+
+Buffs include reductions to the income cost of replenishment, some income bonuses for taking centers, and increases to the amount of AP earned for larger players. Buffs are TEMPORARY, and only last the duration of each turn, but activate automatically after research—within the same *phase*. These reductions are earned via research paths and stack. For some examples:
+
+Reduction to Cost of Replenishment:
+
+> Researching three buffs down this route will reduce all costs by 30%—at first only by 5%, then by 10% for the next time, and 15% after than. It is impossible to entirely eliminate all costs of replenishment, but these reductions result in defensive and offensive losses costing only 40% and 20% respectively, and all other cases costing **nothing**.
+
+Bonuses for Taking Centers:
+
+> Pillaging! Researching buffs down this route will give an income reward for taking centers that is increased per level of research down the route and stacks with previous levels. Researching three buffs down the route will give a bonus of +6% of total income earned from the start of a turn.
+>
+> ::: {.callout-tip icon="false"}
+> ## Bonuses Research Example
+>
+> For example, if you earned 100 income at the start of Spring `year-something`, and you purchased three buffs down this route, then when you capture any center in the same phase (Spring `year-something`) or the next phase (Fall `year-something`), you with earn 6 income immediately—in the same phase—for the capture of that center.
+> :::
+
+Increases to AP Earned:
+
+> Makes the exponential decrease in AP earned per center flatter.
+
+# Accoutrements
+
+**These are the fun tools**. Accoutrements must be researched (once) using income, and then purchased for each use using income. These do not cost AP, and unlike buffs, they are not temporary to only the turn they were purchased in, but rather are one-time use upon purchase and remain available for use across phases and turns until they are used. Accoutrements range from snooping- to "counter-snooping"-related niceties. For example:
+
+War Plans:
+
+> Researching down this path and purchasing the associated accoutrement allows you to get hints on one specified order (*1* move can still be a notable informational advantage) in a tile (province) by another player at the time the accoutrement is used[^1]. The higher the level of research, the more accurate the hint—at lower levels, dummy moves will be by a probability chance, and/or the type of move may be reported, but not the destination.
+
+[^1]: Be careful, if you use it before the enter an order, you'll get nothing!
+
+False Flags:
+
+> Researching down this path and purchasing the associated accoutrement allows you to *fake* hints served by the "War Plans" accouterments for a specified tile, providing them as dummy moves. While War Plans requires selecting a tile, False Flags work across all tiles as a passive effect to counter War Plans for the phase in which the former is activated[^2]. This muddles the information war between players.
+
+[^2]: That means that it is in your interest to activate this early in the phase you want to use it in!
+
+Government Insiders:
+
+> Researching down this path and purchasing the associated accoutrement allows you to get estimates of other players incomes and AP.
+
+Hi-Fi Audio:
+
+> Researching down this path allows you to see more details about voice-chat rooms such as:
+>
+> 1.  The total number of rooms are a given time;
+> 2.  The players currently in *any* call.
+>
+> No level of research will show exactly which player is in which call, but by knowing the details above and using some deduction it should be possible to decipher who is with who in what calls.
