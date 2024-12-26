@@ -1,6 +1,7 @@
 ---
 title: "Chicanery"
 page-navigation: false
+bread-crumbs: false
 ---
 
 A game inspired by [Diplomacy](https://en.wikipedia.org/wiki/Diplomacy_(game) "Diplomacy (game) Wikipedia") but with its own identity.
@@ -9,7 +10,7 @@ A game inspired by [Diplomacy](https://en.wikipedia.org/wiki/Diplomacy_(game) "D
 
 # Overview
 
-Chicanery is a multiplayer strategy game with simultaneous turns following the turn/phase format of Diplomacy and using traditional Diplomacy unit combat mechanics. For a thorough understanding of that game, see the online multiplayer implementation linked here: [webDiplomacy](https://webdiplomacy.net/intro.php "Intro to webDiplomacy"). Chicanery notably diverges from Diplomacy in several aspects---see the [wiki](wiki.qmd "Chicanery game wiki.") for more---but aims to maintain the same core theme: emergent player interactions via negotiation (backstabbing your friends and starting fist-fights over a tabletop game from the '50s). Your fundamental objective remains to dominate the map by outwitting your friends.
+Chicanery is a multiplayer strategy game with simultaneous turns following the turn/phase format of Diplomacy and using traditional Diplomacy unit combat mechanics. For a thorough understanding of that game, see the online multiplayer implementation linked here: [webDiplomacy](https://webdiplomacy.net/intro.php "Intro to webDiplomacy"). Chicanery notably diverges from Diplomacy in several aspects---see the [wiki](wiki/index.qmd "Chicanery game wiki.") for more---but aims to maintain the same core theme: emergent player interactions via negotiation (backstabbing your friends and starting fist-fights over a tabletop game from the '50s). Your fundamental objective remains to dominate the map by outwitting your friends.
 
 # Installation
 
