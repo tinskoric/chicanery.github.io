@@ -1,7 +1,10 @@
 ---
 title: "Chicanery"
 page-navigation: false
-bread-crumbs: false
+toc: false
+grid:
+  margin-width: 0px
+  body-width: 1300px
 ---
 
 A game inspired by [Diplomacy](https://en.wikipedia.org/wiki/Diplomacy_(game) "Diplomacy (game) Wikipedia") but with its own identity.

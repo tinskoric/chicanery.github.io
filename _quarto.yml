@@ -5,6 +5,7 @@ website:
   title: "Chicanery"
   favicon: icon.png
   sidebar:
+    logo: icon.png
     style: "docked"
     search: true
     contents:
@@ -24,8 +25,8 @@ website:
     location: sidebar
     type: textbox
   page-footer:
-    left: "❤️ Chicanery, 2024"
-    right:
+    left:
+      - "❤️ Chicanery, 2024"
       - icon: github
         href: https://github.com/tinskoric/chicanery
   back-to-top-navigation: true
@@ -37,6 +38,8 @@ format:
     theme: lumen
     css: styles.css
     toc: true
+    grid:
+      body-width: 1050px
 
 editor: visual
 

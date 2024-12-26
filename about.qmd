@@ -1,7 +1,10 @@
 ---
 title: "About"
 page-navigation: false
-bread-crumbs: false
+toc: false
+grid:
+  margin-width: 0px
+  body-width: 1300px
 ---
 
 ------------------------------------------------------------------------
