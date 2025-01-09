@@ -19,6 +19,10 @@ website:
           - wiki/units.qmd
           - wiki/research.qmd
           - wiki/tactics.qmd
+      - section: Development
+        href: dev-wiki.qmd
+        contents:
+          - dev-wiki/map.qmd
       - href: about.qmd
         text: About
   search:

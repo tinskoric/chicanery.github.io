@@ -1,0 +1,61 @@
+---
+title: "Map Development"
+---
+
+------------------------------------------------------------------------
+
+# Map Engine
+
+The game includes an engine to load images[^1] as game maps following a relatively simple format. The engine identifies unique colors in the supplied images as individual units for the map. A text file containing a formatted list of the color hex codes alongside their assigned names and adjacencies (for centers) can then be used to tell the engine how to draw the map in game. As is described in the tutorial section, the game map is split into tiles of three distinct types: land, coastal, and sea; and centers, which are sub-units of the land and coastal tiles.
+
+[^1]: Images of `.png` format labelled as described preferably but it can also handle GIMP `.xcf` files, including separating their layers so long as the layers are named correctly ("LAND","COASTAL", "SEA", "CENTER").
+
+# Creating the Base Map
+
+To illustrate how the map is created for the base game, the below section will... create it. To begin, R[^2] is used to generate a large, border-less, map of uniquely colored European and North African provinces. This map is generated alongside a `.csv` file that lists the names and adjacencies where they exist.
+
+[^2]: I am biased towards R and always find reasons to use it.
+
+::: {.callout-note icon="false"}
+You can make the base map however you want, so long as it follows the format explained in the prior section on the map engine. This section simply details how the *default* game map was put together!
+:::
+
+```{r}
+
+library(dplyr)
+library(ggplot2)
+library(rnaturalearth)
+library(rmapshaper)
+library(sf)
+
+# This is a border outline for manual later use where needed; it is *not* used for map-gen.
+
+top_level_tiles <- ne_countries(scale = 50, returnclass = "sf") %>%
+  ms_simplify(keep = 0.1, keep_shapes = TRUE) %>%
+  ggplot() + geom_sf(lwd = 0.25, color = "white", fill = "transparent") +
+  coord_sf(crs = st_crs(3035),
+           xlim = c(1800000, 6800000), 
+           ylim = c(1000000, 6000000)) +
+  theme_void() +
+  theme(
+    legend.position = "none"
+  )
+ggsave(plot = top_level_tiles, filename = "map_data/top_level_tiles.tiff", width = 4, height = 2.25, device='tiff', dpi=960)
+
+tiles <- ne_states(country = c("Iceland", "Ireland", "United Kingdom", "Norway", "Sweden", "Finland", "Russia", "Denmark", "Estonia", "Latvia", "Lithuania", "France", "Luxembourg", "Belgium", "Netherlands", "Germany", "Czech Republic", "Poland", "Belarus", "Switzerland", "Austria", "Slovakia", "Ukraine", "Portugal", "Spain", "Andorra", "Monaco", "Italy", "Vatican City", "San Marino", "Slovenia", "Hungary", "Croatia", "Bosnia and Herzegovina", "Serbia", "Romania", "Moldova", "Montenegro", "Republic of Serbia", "Kosovo", "Albania", "Macedonia", "Bulgaria", "Greece", "Turkey", "Morocco", "Algeria", "Tunisia", "Cyprus", "Libya", "Egypt", "Israel", "West Bank", "Lebanon", "Syria", "Jordan", "Iraq", "Armenia", "Georgia", "Azerbaijan", "Saudi Arabia", "Kuwait", "Iran", "Kazakhstan", "Northern Cyprus", "Malta", "Greenland"),
+                   returnclass = "sf") %>%
+  ms_simplify(keep = 0.01, keep_shapes = TRUE) %>%
+  ggplot() + geom_sf(aes(fill = name), lwd = 0) +
+  coord_sf(crs = st_crs(3035),
+           xlim = c(1800000, 6800000), 
+           ylim = c(1000000, 6000000)) +
+  theme_void() +
+  theme(
+    legend.position = "none"
+  )
+tiles
+ggsave(plot = tiles, filename = "map_data/tiles.tiff", , width = 4, height = 2.25, device='tiff', dpi=960)
+
+```
+
+That's a lot of provinces, and we don't need all those. The outputted maps are put into an image manipulator with layers for seas, regions, regions, coastal and land centers—and the borders outline used as a guide—constructed as combinations of the provinces.
