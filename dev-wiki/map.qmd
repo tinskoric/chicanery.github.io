@@ -4,7 +4,61 @@ title: "Map Development"
 
 ------------------------------------------------------------------------
 
-# Map Engine
+# Overview
+
+This section details how the game map is created: how the data is generated, displayed, and interacted with. Code chunks are partly supplied for demonstration, although for full and functional code, please go to the game repo.
+
+## Terminology
+
+If you've read through the main tutorial then you can skip this, but here's a quick, non-exhaustive, note on terminology related to the game map:
+
+Tiles
+
+:   The core foundation of the map. These are the chunks of land that players move their armies on and fight directly over. Tiles which border seas are considered "Coastal." You can build buildings and—if the tile contains a center—units, on them
+
+Seas
+
+:   Like tiles, players move their navies on and fight over these. Notably, seas differ in that they do no contain centers, nor do they constitute provinces or regions, *nor* even can anything be built on them (you can't build a building or units in a sea, you can only move in navies). These are pure battlegrounds. If a tile is entirely surrounded by a sea (think of a small island), that tile is considered to "belong" to the sea, meaning that the pair of areas is considered to act as a single area.
+
+    > e.g., a navy controlling the sea *also* controls the island, nothing can be put on the island. This is to avoid some seas with small islands becoming near-impenetrable as players could otherwise stack units in each island to defend the navy.
+
+Centers
+
+:   Exclusively present on *some* tiles, these are represented by small circles on tiles where they are present. They earn income and action points for the players who control them, and allow players to build units if the player can support them.
+
+Provinces
+
+:   Constituted by a group tiles, and owned by a player if that player controls all *centers* within the province.
+
+    > e.g., if a province is made up of 5 tiles, and 3 of those tiles have centers, then you must control at least the 3 tiles with centers to control the province). These earn bonuses to income and action points for players who control them.
+
+Regions
+
+:   Constituted by a group of provinces, and owned by a player if that player controls all *provinces* within the region.
+
+Buildings
+
+:   Can only be built on tiles. There are two buildings:
+
+    -   Forts: Add +1 defense to the tile where they are built;
+
+    -   Supply Hubs: Allow units adjacent to the supply hub to move two tiles in one move order (typically they can only move one) where possible:
+
+        > e.g., if there is an ***empty*** tile (or sea!) in front of a unit, and that unit is adjacent to a supply hub (either in the same tile or one next to the unit), then that unit can move through that empty tile and execute an order in the next ones adjacent to the empty tile. This only works if the intermediate tile in the order is empty! You cannot phase through an enemy to attack behind their lines.
+
+        and allow for units to be built as if the tile was a center.
+
+# Map Generation
+
+Chicanery uses [`.Rds`](https://stat.ethz.ch/R-manual/R-devel/library/base/html/readRDS.html) files to store and manage game data. One such file contains all map data, including:
+
+-   Tiles, and seas, and their geometry;
+-   To what province each tile belongs;
+-   To what region each province belongs;
+-   Whether the tile is coast, and/or if the tile "belongs" to a sea;
+-   Whether the tile contains a center, a fort, and/or a supply hub.
+
+In the game, *no static images are used* for map generation. It is all coordinate geometry stored in a dataset. This is helpful in keeping the game lightweight, and works well with R. However, it does mean that if you want to *change* the map, you need to generate an entirely different dataset. This process is incredibly tedious manually.
 
 The game includes an engine to load images[^1] as game maps following a relatively simple format. The engine identifies unique colors in the supplied images as individual units for the map. A text file containing a formatted list of the color hex codes alongside their assigned names and adjacencies (for centers) can then be used to tell the engine how to draw the map in game. As is described in the tutorial section, the game map is split into tiles of three distinct types: land, coastal, and sea; and centers, which are sub-units of the land and coastal tiles.
 

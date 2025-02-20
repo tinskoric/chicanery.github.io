@@ -9,13 +9,11 @@ grid:
 
 ------------------------------------------------------------------------
 
-This is just a little attribution page for the game. Of course the inspiration for the project is classic [Diplomacy](https://en.wikipedia.org/wiki/Diplomacy_(game) "Diplomacy (game) Wikipedia") by [Allan B. Calhamer](https://en.wikipedia.org/wiki/Allan_B._Calhamer "Allan B. Calhamer wikipedia article."). The authors of this project, Chicanery, are: Kenny Luong, Adam Sikorski, Tin Skoric, Issac Zheng. Below are some links to us:
+This is just a little attribution page for the game. Chicanery was made by [Tin Skoric](https://tins.page/ "Tin's page"), alongside design input from Kenny Luong. Of course the inspiration for the project is classic [Diplomacy](https://en.wikipedia.org/wiki/Diplomacy_(game) "Diplomacy (game) Wikipedia") by [Allan B. Calhamer](https://en.wikipedia.org/wiki/Allan_B._Calhamer "Allan B. Calhamer wikipedia article."). Below are some links to us:
 
 | Name | GitHub | LinkedIn | Personal Site |
-|------------------|------------------|------------------|------------------|
+|----|----|----|----|
 | Kenny Luong |  |  |  |
-| Adam Sikorski |  |  |  |
 | Tin Skoric | [🚀](https://github.com/tinskoric "Tin's GitHub") | [🕴️](https://www.linkedin.com/in/tinskoric/ "Tin's LinkedIn") | [🔗](https://tins.page/ "Tin's page") |
-| Issac Zheng |  |  |  |
 
-: The Links
+: The Links {.striped .hover}

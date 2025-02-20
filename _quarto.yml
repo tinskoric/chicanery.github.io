@@ -3,9 +3,11 @@ project:
 
 website:
   title: "Chicanery"
-  favicon: icon.png
+  favicon: static/inverted_icon.png
   sidebar:
-    logo: icon.png
+    logo:
+      light: static/icon.png
+      dark: static/inverted_icon.png
     style: "docked"
     search: true
     contents:
@@ -42,6 +44,7 @@ format:
     theme: lumen
     css: styles.css
     toc: true
+    html-table-processing: none
     grid:
       body-width: 1050px
 
