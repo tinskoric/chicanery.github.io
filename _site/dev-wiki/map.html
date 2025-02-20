@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.39">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Map Development – Chicanery</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../about.html" rel="next">
+<link href="../dev-wiki.html" rel="prev">
+<link href="../static/inverted_icon.png" rel="icon" type="image/png">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-b35ffffc1c0e30bc688dede3e6628ac4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <a class="flex-grow-1 no-decor" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+          <h1 class="quarto-secondary-nav-title">Map Development</h1>
+        </a>     
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+      <a href="../index.html" class="sidebar-logo-link">
+      <img src="../static/icon.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../wiki.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tutorial</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../wiki/map.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Map and Phases</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../wiki/orders.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Orders and Economy</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../wiki/units.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Units and Buildings</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../wiki/research.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Research</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../wiki/tactics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Advanced Tactics</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../dev-wiki.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Development</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../dev-wiki/map.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Map Development</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../about.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">About</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#creating-the-base-map" id="toc-creating-the-base-map" class="nav-link" data-scroll-target="#creating-the-base-map">Creating the Base Map</a>
+  <ul class="collapse">
+  <li><a href="#an-outline-to-start" id="toc-an-outline-to-start" class="nav-link" data-scroll-target="#an-outline-to-start">An Outline to Start</a></li>
+  <li><a href="#taking-form" id="toc-taking-form" class="nav-link" data-scroll-target="#taking-form">Taking Form</a></li>
+  <li><a href="#read-the-script" id="toc-read-the-script" class="nav-link" data-scroll-target="#read-the-script">Read the Script</a></li>
+  </ul></li>
+  <li><a href="#interactivity" id="toc-interactivity" class="nav-link" data-scroll-target="#interactivity">Interactivity</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block">Map Development</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Terminology
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>If you’ve read through the main tutorial then you can skip this, but here’s a quick, non-exhaustive, note on terminology related to the game map:</p>
+<dl>
+<dt>Tiles</dt>
+<dd>
+<p>The core foundation of the map. These are the chunks of land that players move their armies on and fight directly over. Tiles which border seas are considered “Coastal.” You can build buildings and—if the tile contains a center—units, on them</p>
+</dd>
+<dt>Seas</dt>
+<dd>
+<p>Like tiles, players move their navies on and fight over these. Notably, seas differ in that they do no contain centers, nor do they constitute provinces or regions, <em>nor</em> even can anything be built on them (you can’t build a building or units in a sea, you can only move in navies). These are pure battlegrounds. If a tile is entirely surrounded by a sea (think of a small island), that tile is considered to “belong” to the sea, meaning that the pair of areas is considered to act as a single area.</p>
+<blockquote class="blockquote">
+<p>e.g., a navy controlling the sea <em>also</em> controls the island, nothing can be put on the island. This is to avoid some seas with small islands becoming near-impenetrable as players could otherwise stack units in each island to defend the navy.</p>
+</blockquote>
+</dd>
+<dt>Centers</dt>
+<dd>
+<p>Exclusively present on <em>some</em> tiles, these are represented by small circles on tiles where they are present. They earn income and action points for the players who control them, and allow players to build units if the player can support them.</p>
+</dd>
+<dt>Provinces</dt>
+<dd>
+<p>Constituted by a group tiles, and owned by a player if that player controls all <em>centers</em> within the province.</p>
+<blockquote class="blockquote">
+<p>e.g., if a province is made up of 5 tiles, and 3 of those tiles have centers, then you must control at least the 3 tiles with centers to control the province). These earn bonuses to income and action points for players who control them.</p>
+</blockquote>
+</dd>
+<dt>Regions</dt>
+<dd>
+<p>Constituted by a group of provinces, and owned by a player if that player controls all <em>provinces</em> within the region.</p>
+</dd>
+<dt>Buildings</dt>
+<dd>
+<p>Can only be built on tiles. There are two buildings:</p>
+<ul>
+<li><p>Forts: Add +1 defense to the tile where they are built;</p></li>
+<li><p>Supply Hubs: Allow units adjacent to the supply hub to move two tiles in one move order (typically they can only move one) where possible:</p>
+<blockquote class="blockquote">
+<p>e.g., if there is an <strong><em>empty</em></strong> tile (or sea!) in front of a unit, and that unit is adjacent to a supply hub (either in the same tile or one next to the unit), then that unit can move through that empty tile and execute an order in the next ones adjacent to the empty tile. This only works if the intermediate tile in the order is empty! You cannot phase through an enemy to attack behind their lines.</p>
+</blockquote>
+<p>and allow for units to be built as if the tile was a center.</p></li>
+</ul>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<hr>
+<section id="overview" class="level1">
+<h1>Overview</h1>
+<p>This page details how the game map is created: how the data is generated, displayed, and interacted with. Code chunks are partly supplied for demonstration, although for full and functional code, please go to the <a href="https://github.com/tinskoric/chicanery">game repo</a>.</p>
+<p>To be brief: Chicanery uses <a href="https://stat.ethz.ch/R-manual/R-devel/library/base/html/readRDS.html"><code>.Rds</code></a> files to store and manage game data. One such file (<code>gamedata.Rds</code>) contains all map data, including:</p>
+<ul>
+<li>Tiles, and seas, and their geometry;</li>
+<li>To what province each tile belongs;</li>
+<li>To what region each province belongs;</li>
+<li>Whether the tile is coast, and/or if the tile “belongs” to a sea;</li>
+<li>Whether the tile contains a center, a fort, and/or a supply hub.</li>
+</ul>
+<p>This is helpful in keeping the game realtively lightweight, and works well with R. To create this dataset, we first draw our map by layer (Tiles, Seas, Provinces, etc.) using unique-valued RGB colors for each shape, and export each layer individually as a <code>.png</code> file. You can do this however you like: using Adobe Photoshop, GNU Image Manipulation Program, or some other editor. We then feed these files into a script, <a href="https://github.com/tinskoric/chicanery/blob/main/dev/map/mapDataGenerate.R"><code>mapDataGenerate.R</code></a>, that scrounges each pixel of each file and groups them by RGB value. The result is a list of tile and sea geometries: polygons and multipolygons, and their adjacencies. We then assign tiles to their respective provinces and regions by checking which province and region geometries the centroids of each tile fall into and do the same to assign centers, and assign tiles adjacent to seas as coastal. Lastly, we manually define which tiles are occupied to begin with, and what units—if any—occupy them. With this done, we have our complete dataset.</p>
+<p>With the dataset, we export “blank” layers for the tiles, provinces, and regions, to serve as backgrounds for the map in-game, and use <code>ggplot2</code> and <code>ggiraph</code> to create an interactive map using the data. For a semi-step-by-step guide on how the base map for the game was created (including parts that aren’t required for new map generation in general), check the sections below.</p>
+</section>
+<section id="creating-the-base-map" class="level1">
+<h1>Creating the Base Map</h1>
+<p>The map in the base game is similar to that of standard-variant Diplomacy. To recreate it with relative precision, a little style, and not too much tracing, we can plot out the real map, import that into an image editor to edit our layers, and run the output through the <a href="https://github.com/tinskoric/chicanery/blob/main/dev/map/mapDataGenerate.R"><code>mapDataGenerate.R</code></a> script.</p>
+<section id="an-outline-to-start" class="level2">
+<h2 class="anchored" data-anchor-id="an-outline-to-start">An Outline to Start</h2>
+<p>To begin we can use R to generate a large, border-less, map of European and North African provinces:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rnaturalearth)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rmapshaper)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># This is a border outline for manual later use where needed; it is *not* used for map-gen.</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>top_level_tiles <span class="ot">&lt;-</span> <span class="fu">ne_countries</span>(<span class="at">scale =</span> <span class="dv">50</span>, <span class="at">returnclass =</span> <span class="st">"sf"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ms_simplify</span>(<span class="at">keep =</span> <span class="fl">0.1</span>, <span class="at">keep_shapes =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">geom_sf</span>(<span class="at">lwd =</span> <span class="fl">0.25</span>, <span class="at">color =</span> <span class="st">"white"</span>, <span class="at">fill =</span> <span class="st">"transparent"</span>) <span class="sc">+</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_sf</span>(<span class="at">crs =</span> <span class="fu">st_crs</span>(<span class="dv">3035</span>),</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>           <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">1800000</span>, <span class="dv">6800000</span>), </span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>           <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">1000000</span>, <span class="dv">6000000</span>)) <span class="sc">+</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"none"</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="at">plot =</span> top_level_tiles, <span class="at">filename =</span> <span class="st">"map_data/top_level_tiles.tiff"</span>, <span class="at">width =</span> <span class="dv">4</span>, <span class="at">height =</span> <span class="fl">2.25</span>, <span class="at">device=</span><span class="st">'tiff'</span>, <span class="at">dpi=</span><span class="dv">960</span>)</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>tiles <span class="ot">&lt;-</span> <span class="fu">ne_states</span>(<span class="at">country =</span> <span class="fu">c</span>(<span class="st">"Iceland"</span>, <span class="st">"Ireland"</span>, <span class="st">"United Kingdom"</span>, <span class="st">"Norway"</span>, <span class="st">"Sweden"</span>, <span class="st">"Finland"</span>, <span class="st">"Russia"</span>, <span class="st">"Denmark"</span>, <span class="st">"Estonia"</span>, <span class="st">"Latvia"</span>, <span class="st">"Lithuania"</span>, <span class="st">"France"</span>, <span class="st">"Luxembourg"</span>, <span class="st">"Belgium"</span>, <span class="st">"Netherlands"</span>, <span class="st">"Germany"</span>, <span class="st">"Czech Republic"</span>, <span class="st">"Poland"</span>, <span class="st">"Belarus"</span>, <span class="st">"Switzerland"</span>, <span class="st">"Austria"</span>, <span class="st">"Slovakia"</span>, <span class="st">"Ukraine"</span>, <span class="st">"Portugal"</span>, <span class="st">"Spain"</span>, <span class="st">"Andorra"</span>, <span class="st">"Monaco"</span>, <span class="st">"Italy"</span>, <span class="st">"Vatican City"</span>, <span class="st">"San Marino"</span>, <span class="st">"Slovenia"</span>, <span class="st">"Hungary"</span>, <span class="st">"Croatia"</span>, <span class="st">"Bosnia and Herzegovina"</span>, <span class="st">"Serbia"</span>, <span class="st">"Romania"</span>, <span class="st">"Moldova"</span>, <span class="st">"Montenegro"</span>, <span class="st">"Republic of Serbia"</span>, <span class="st">"Kosovo"</span>, <span class="st">"Albania"</span>, <span class="st">"Macedonia"</span>, <span class="st">"Bulgaria"</span>, <span class="st">"Greece"</span>, <span class="st">"Turkey"</span>, <span class="st">"Morocco"</span>, <span class="st">"Algeria"</span>, <span class="st">"Tunisia"</span>, <span class="st">"Cyprus"</span>, <span class="st">"Libya"</span>, <span class="st">"Egypt"</span>, <span class="st">"Israel"</span>, <span class="st">"West Bank"</span>, <span class="st">"Lebanon"</span>, <span class="st">"Syria"</span>, <span class="st">"Jordan"</span>, <span class="st">"Iraq"</span>, <span class="st">"Armenia"</span>, <span class="st">"Georgia"</span>, <span class="st">"Azerbaijan"</span>, <span class="st">"Saudi Arabia"</span>, <span class="st">"Kuwait"</span>, <span class="st">"Iran"</span>, <span class="st">"Kazakhstan"</span>, <span class="st">"Northern Cyprus"</span>, <span class="st">"Malta"</span>, <span class="st">"Greenland"</span>),</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>                   <span class="at">returnclass =</span> <span class="st">"sf"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ms_simplify</span>(<span class="at">keep =</span> <span class="fl">0.01</span>, <span class="at">keep_shapes =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> name), <span class="at">lwd =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_sf</span>(<span class="at">crs =</span> <span class="fu">st_crs</span>(<span class="dv">3035</span>),</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>           <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">1800000</span>, <span class="dv">6800000</span>), </span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>           <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">1000000</span>, <span class="dv">6000000</span>)) <span class="sc">+</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"none"</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>tiles</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="at">plot =</span> tiles, <span class="at">filename =</span> <span class="st">"map_data/tiles.tiff"</span>, , <span class="at">width =</span> <span class="dv">4</span>, <span class="at">height =</span> <span class="fl">2.25</span>, <span class="at">device=</span><span class="st">'tiff'</span>, <span class="at">dpi=</span><span class="dv">960</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Now we have a good foundation! Take this and put it into an image editor.</p>
+</section>
+<section id="taking-form" class="level2">
+<h2 class="anchored" data-anchor-id="taking-form">Taking Form</h2>
+<p>Taking that map, we import it into GNU Image Manipulation Program across six layers:</p>
+<div class="line-block">Tiles, Provinces, Regions, Centers, Coasts, and Seas</div>
+<p>and edit to our hearts’ desire. Remember to assign unique RGB values to each shape in each layer! This process can be very long, but doesn’t require much technical explanation—just draw how you want things to look. When done, export each layer as an 8-bit RGBA <code>.png</code> file. This is our result:</p>
+<div>
+
+</div>
+<div class="quarto-layout-panel" data-layout-nrow="2">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../static/dev-wiki/map/raw/TILES.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Tiles"><img src="../static/dev-wiki/map/raw/TILES.png" class="img-fluid figure-img" alt="Tiles"></a></p>
+<figcaption>Tiles</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../static/dev-wiki/map/raw/SEAS.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Seas"><img src="../static/dev-wiki/map/raw/SEAS.png" class="img-fluid figure-img" alt="Seas"></a></p>
+<figcaption>Seas</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../static/dev-wiki/map/raw/CENTERS.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Centers"><img src="../static/dev-wiki/map/raw/CENTERS.png" class="img-fluid figure-img" alt="Centers"></a></p>
+<figcaption>Centers</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../static/dev-wiki/map/raw/COASTS.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Coasts"><img src="../static/dev-wiki/map/raw/COASTS.png" class="img-fluid figure-img" alt="Coasts"></a></p>
+<figcaption>Coasts</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../static/dev-wiki/map/raw/PROVINCES.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Provinces"><img src="../static/dev-wiki/map/raw/PROVINCES.png" class="img-fluid figure-img" alt="Provinces"></a></p>
+<figcaption>Provinces</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../static/dev-wiki/map/raw/REGIONS.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="Regions"><img src="../static/dev-wiki/map/raw/REGIONS.png" class="img-fluid figure-img" alt="Regions"></a></p>
+<figcaption>Regions</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="read-the-script" class="level2">
+<h2 class="anchored" data-anchor-id="read-the-script">Read the Script</h2>
+<p>With our files ready, we run <a href="https://github.com/tinskoric/chicanery/blob/main/dev/map/mapDataGenerate.R"><code>mapDataGenerate.R</code></a>. We begin by first reading in our <code>.png</code> files:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(geojsonsf)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nngeo)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotly)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(png)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(smoothr)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(jsonlite)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Load raw map image files</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>regions <span class="ot">&lt;-</span> <span class="fu">readPNG</span>(<span class="st">"data/raw/REGIONS.png"</span>)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>provinces <span class="ot">&lt;-</span> <span class="fu">readPNG</span>(<span class="st">"data/raw/PROVINCES.png"</span>)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>tiles <span class="ot">&lt;-</span> <span class="fu">readPNG</span>(<span class="st">"data/raw/TILES.png"</span>)</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>seas <span class="ot">&lt;-</span> <span class="fu">readPNG</span>(<span class="st">"data/raw/SEAS.png"</span>)</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>coasts <span class="ot">&lt;-</span> <span class="fu">readPNG</span>(<span class="st">"data/raw/COASTS.png"</span>)</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>centers <span class="ot">&lt;-</span> <span class="fu">readPNG</span>(<span class="st">"data/raw/CENTERS.png"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>These just store the images in large list array formats. If you want, you can do <code>plot(tiles)</code>, or some other layer, to see the image in the R viewer. We then take each of these images, and run them through a function we’ve made, <code>unravelCoords()</code>:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>regionData <span class="ot">&lt;-</span> <span class="fu">unravelCoords</span>(regions, <span class="st">"REGION"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_as_sf</span>()</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>provinceData <span class="ot">&lt;-</span> <span class="fu">unravelCoords</span>(provinces, <span class="st">"PROVINCE"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_as_sf</span>()</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>tileData <span class="ot">&lt;-</span> <span class="fu">unravelCoords</span>(tiles, <span class="st">"TILE"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_as_sf</span>()</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co"># ... etc, etc.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This function is comprised of a good little chunk of code and some helper functions all cobbled together, but in practice what it does is: check the dimensions of an image, and map each pixel to a coordinate within the dimensions while recording the RGB value of the pixel, then finally grouping pixels with alike RGB values together and spitting out the coordinates to re-draw the shape those pixels made. After this process is done, we combine <code>seaData</code> and <code>tileData</code> into a set called <code>gameMapShapes</code> and use information from the other sets to inform some additional columns and work. Please check the file of reference, <a href="https://github.com/tinskoric/chicanery/blob/main/dev/map/mapDataGenerate.R"><code>mapDataGenerate.R</code></a>, if you want to go in depth on these processes. Lastly, we figure out which tile is where:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>labels_test <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(gameMapShapes) <span class="sc">+</span> <span class="fu">geom_sf</span>() <span class="sc">+</span> <span class="fu">geom_sf_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> shape), <span class="at">size =</span> <span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../static/dev-wiki/map/extras/labels_test.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="Labelled Tiles"><img src="../static/dev-wiki/map/extras/labels_test.png" class="img-fluid figure-img" alt="Labelled Tiles"></a></p>
+<figcaption>Labelled Tiles</figcaption>
+</figure>
+</div>
+<p>and manually assign some tiles to be owned by certain countries at the start of the game:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>gameMapShapes <span class="ot">&lt;-</span> gameMapShapes <span class="sc">%&gt;%</span> </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">occupied_by =</span> <span class="fu">case_when</span>(</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="do">### GBR: 6 (Notice how it holds 2 non-centers at start... stretched thin!)</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    shape <span class="sc">==</span> <span class="st">"TILE_139"</span> <span class="sc">~</span> <span class="st">"GBR"</span>, <span class="co">#center</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    shape <span class="sc">==</span> <span class="st">"TILE_87"</span> <span class="sc">~</span> <span class="st">"GBR"</span>, <span class="co">#center</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    shape <span class="sc">==</span> <span class="st">"TILE_148"</span> <span class="sc">~</span> <span class="st">"GBR"</span>, <span class="co">#center</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    shape <span class="sc">==</span> <span class="st">"TILE_116"</span> <span class="sc">~</span> <span class="st">"GBR"</span>, <span class="co">#center</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    shape <span class="sc">==</span> <span class="st">"TILE_134"</span> <span class="sc">~</span> <span class="st">"GBR"</span>,</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    shape <span class="sc">==</span> <span class="st">"TILE_29"</span> <span class="sc">~</span> <span class="st">"GBR"</span>, <span class="co">#center</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    shape <span class="sc">==</span> <span class="st">"TILE_160"</span> <span class="sc">~</span> <span class="st">"GBR"</span>, <span class="co">#center</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    shape <span class="sc">==</span> <span class="st">"TILE_49"</span> <span class="sc">~</span> <span class="st">"GBR"</span>,</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    <span class="do">### FRA: 5</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    shape <span class="sc">==</span> <span class="st">"TILE_80"</span> <span class="sc">~</span> <span class="st">"FRA"</span>, <span class="co"># center</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    shape <span class="sc">==</span> <span class="st">"TILE_205"</span> <span class="sc">~</span> <span class="st">"FRA"</span>, <span class="co"># center</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    shape <span class="sc">==</span> <span class="st">"TILE_169"</span> <span class="sc">~</span> <span class="st">"FRA"</span>, <span class="co"># center</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    shape <span class="sc">==</span> <span class="st">"TILE_101"</span> <span class="sc">~</span> <span class="st">"FRA"</span>, <span class="co"># center</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    shape <span class="sc">==</span> <span class="st">"TILE_121"</span> <span class="sc">~</span> <span class="st">"FRA"</span>, <span class="co"># center</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    <span class="do">### GER: 6 (same count as britain, but all in one place)</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>    shape <span class="sc">==</span> <span class="st">"TILE_194"</span> <span class="sc">~</span> <span class="st">"GER"</span>, <span class="co">#center</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    shape <span class="sc">==</span> <span class="st">"TILE_97"</span> <span class="sc">~</span> <span class="st">"GER"</span>, <span class="co">#center</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>    shape <span class="sc">==</span> <span class="st">"TILE_54"</span> <span class="sc">~</span> <span class="st">"GER"</span>, <span class="co">#center</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>    shape <span class="sc">==</span> <span class="st">"TILE_161"</span> <span class="sc">~</span> <span class="st">"GER"</span>, <span class="co">#center</span></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>    shape <span class="sc">==</span> <span class="st">"TILE_10"</span> <span class="sc">~</span> <span class="st">"GER"</span>, <span class="co">#center</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>    shape <span class="sc">==</span> <span class="st">"TILE_118"</span> <span class="sc">~</span> <span class="st">"GER"</span>, <span class="co">#center</span></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>    <span class="do">### RUS: 7</span></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>    shape <span class="sc">==</span> <span class="st">"TILE_165"</span> <span class="sc">~</span> <span class="st">"RUS"</span>, <span class="co">#center</span></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>    shape <span class="sc">==</span> <span class="st">"TILE_6"</span> <span class="sc">~</span> <span class="st">"RUS"</span>, <span class="co">#center</span></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>    shape <span class="sc">==</span> <span class="st">"TILE_152"</span> <span class="sc">~</span> <span class="st">"RUS"</span>, <span class="co">#center</span></span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>    shape <span class="sc">==</span> <span class="st">"TILE_43"</span> <span class="sc">~</span> <span class="st">"RUS"</span>, <span class="co">#center</span></span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>    shape <span class="sc">==</span> <span class="st">"TILE_212"</span> <span class="sc">~</span> <span class="st">"RUS"</span>, <span class="co">#center</span></span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>    shape <span class="sc">==</span> <span class="st">"TILE_40"</span> <span class="sc">~</span> <span class="st">"RUS"</span>, <span class="co">#center</span></span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>    shape <span class="sc">==</span> <span class="st">"TILE_209"</span> <span class="sc">~</span> <span class="st">"RUS"</span>, <span class="co">#center</span></span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>    <span class="do">### AHE: 4</span></span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>    shape <span class="sc">==</span> <span class="st">"TILE_5"</span> <span class="sc">~</span> <span class="st">"AHE"</span>, <span class="co">#center</span></span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>    shape <span class="sc">==</span> <span class="st">"TILE_188"</span> <span class="sc">~</span> <span class="st">"AHE"</span>, <span class="co">#center</span></span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>    shape <span class="sc">==</span> <span class="st">"TILE_79"</span> <span class="sc">~</span> <span class="st">"AHE"</span>, <span class="co">#center</span></span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>    shape <span class="sc">==</span> <span class="st">"TILE_14"</span> <span class="sc">~</span> <span class="st">"AHE"</span>, <span class="co">#center</span></span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>    <span class="do">### ITA: 4 (spread between europe and north africa like a mini-france)</span></span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>    shape <span class="sc">==</span> <span class="st">"TILE_195"</span> <span class="sc">~</span> <span class="st">"ITA"</span>, <span class="co">#center</span></span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>    shape <span class="sc">==</span> <span class="st">"TILE_130"</span> <span class="sc">~</span> <span class="st">"ITA"</span>, <span class="co">#center</span></span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>    shape <span class="sc">==</span> <span class="st">"TILE_26"</span> <span class="sc">~</span> <span class="st">"ITA"</span>, <span class="co">#center</span></span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a>    shape <span class="sc">==</span> <span class="st">"TILE_164"</span> <span class="sc">~</span> <span class="st">"ITA"</span>, <span class="co">#center</span></span>
+<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a>    <span class="do">### OTT</span></span>
+<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a>    shape <span class="sc">==</span> <span class="st">"TILE_213"</span> <span class="sc">~</span> <span class="st">"OTT"</span>, <span class="co">#center</span></span>
+<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a>    shape <span class="sc">==</span> <span class="st">"TILE_183"</span> <span class="sc">~</span> <span class="st">"OTT"</span>, <span class="co">#center</span></span>
+<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a>    shape <span class="sc">==</span> <span class="st">"TILE_142"</span> <span class="sc">~</span> <span class="st">"OTT"</span>, <span class="co">#center</span></span>
+<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a>    shape <span class="sc">==</span> <span class="st">"TILE_170"</span> <span class="sc">~</span> <span class="st">"OTT"</span>, <span class="co">#center</span></span>
+<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a>    shape <span class="sc">==</span> <span class="st">"TILE_48"</span> <span class="sc">~</span> <span class="st">"OTT"</span>, <span class="co">#center</span></span>
+<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a>    <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"unoccupied"</span></span>
+<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a>  ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>With that done, we at last check for and add adjencencies:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>adj_nested_list <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(gameMapShapes)) {</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  temp_adj_i_list <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(<span class="fu">as.list</span>(<span class="fu">strsplit</span>(<span class="fu">gsub</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">"</span>,<span class="st">""</span>, <span class="fu">gsub</span>(<span class="st">" "</span>, <span class="st">""</span>, <span class="fu">gsub</span>(<span class="st">"</span><span class="sc">\"</span><span class="st">"</span>, <span class="st">""</span>,<span class="fu">gsub</span>(<span class="st">"[c()]"</span>, <span class="st">""</span>, (gameMapShapes<span class="sc">$</span>adjacency_list[i]))))), <span class="st">","</span>)[[<span class="dv">1</span>]]))) {</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    temp_adj_i_list[[j]] <span class="ot">&lt;-</span>  <span class="fu">toString</span>(<span class="fu">as.list</span>(<span class="fu">strsplit</span>(<span class="fu">gsub</span>(<span class="st">"</span><span class="sc">\n</span><span class="st">"</span>,<span class="st">""</span>, <span class="fu">gsub</span>(<span class="st">" "</span>, <span class="st">""</span>, <span class="fu">gsub</span>(<span class="st">"</span><span class="sc">\"</span><span class="st">"</span>, <span class="st">""</span>,<span class="fu">gsub</span>(<span class="st">"[c()]"</span>, <span class="st">""</span>, (gameMapShapes<span class="sc">$</span>adjacency_list[i]))))), <span class="st">","</span>)[[<span class="dv">1</span>]])[j])</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  adj_nested_list[[i]]  <span class="ot">&lt;-</span> temp_adj_i_list</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>gameMapData <span class="ot">&lt;-</span> gameMapData_no_adj</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>gameMapData[[<span class="st">"adj"</span>]] <span class="ot">&lt;-</span> adj_nested_list</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>at last arriving at our conclusion for map generation:</p>
+<p><img src="../static/dev-wiki/map/map.png" class="img-fluid" alt="The Base Map"> :::{.callout-note collapse=“true”} ## Plot Code</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>map_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> gameMapShapes, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> (gameMapShapes <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">substr</span>(tile, <span class="dv">1</span>,<span class="dv">3</span>) <span class="sc">==</span> <span class="st">"SEA"</span>)), <span class="at">fill =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> (gameMapShapes <span class="sc">%&gt;%</span> <span class="fu">filter</span>(occupied_by <span class="sc">==</span> <span class="st">"unoccupied"</span>) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(ofRegion))), <span class="at">fill =</span> <span class="st">"beige"</span>) <span class="sc">+</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> (gameMapShapes <span class="sc">%&gt;%</span> <span class="fu">filter</span>(occupied_by <span class="sc">!=</span> <span class="st">"unoccupied"</span>)), <span class="fu">aes</span>(<span class="at">fill =</span> occupied_by)) <span class="sc">+</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> <span class="fu">st_as_sf</span>(<span class="fu">as.data.frame</span>(gameMapShapes) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(center <span class="sc">==</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> <span class="fu">select</span>(centroid)), <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> <span class="fu">st_as_sf</span>(<span class="fu">as.data.frame</span>(gameMapShapes) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(center <span class="sc">==</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> <span class="fu">select</span>(centroid)), <span class="at">color =</span> <span class="st">"white"</span>, <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf_text</span>(<span class="at">data =</span> (gameMapShapes <span class="sc">%&gt;%</span> <span class="fu">filter</span>(unit <span class="sc">!=</span> <span class="st">"none"</span>)), <span class="fu">aes</span>(<span class="at">label =</span> unit), <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Dark2"</span>, <span class="at">direction =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"bottom"</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Country"</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"data/extras/map.png"</span>, map_plot, <span class="at">width =</span> <span class="dv">16</span>, <span class="at">height =</span> <span class="dv">9</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>:::</p>
+<p>Now we export just the background layers for tiles, provinces and regions (with seas in each of course):</p>
+<div>
+
+</div>
+<div class="quarto-layout-panel" data-layout-ncol="3">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../static/dev-wiki/map/game/tilemap.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8" title="Tiles"><img src="../static/dev-wiki/map/game/tilemap.png" class="img-fluid figure-img" alt="Tiles"></a></p>
+<figcaption>Tiles</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../static/dev-wiki/map/game/provincemap.png" class="lightbox" data-gallery="quarto-lightbox-gallery-9" title="Provinces"><img src="../static/dev-wiki/map/game/provincemap.png" class="img-fluid figure-img" alt="Provinces"></a></p>
+<figcaption>Provinces</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell" style="flex-basis: 33.3%;justify-content: flex-start;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="../static/dev-wiki/map/game/regionmap.png" class="lightbox" data-gallery="quarto-lightbox-gallery-10" title="Regions"><img src="../static/dev-wiki/map/game/regionmap.png" class="img-fluid figure-img" alt="Regions"></a></p>
+<figcaption>Regions</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p>the code for those backgrounds is below:</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" aria-current="page">Tiles</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Provinces</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">Regions</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>tile_bg <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> (map_data <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">substr</span>(tile, <span class="dv">1</span>, <span class="dv">3</span>) <span class="sc">==</span> <span class="st">"SEA"</span>)), <span class="at">fill =</span> <span class="st">"navy"</span>, <span class="at">color =</span> <span class="st">"navy"</span>) <span class="sc">+</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> (map_data <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">substr</span>(tile, <span class="dv">1</span>, <span class="dv">4</span>) <span class="sc">==</span> <span class="st">"TILE"</span>)), <span class="at">fill =</span> <span class="st">"beige"</span>, <span class="at">color =</span> <span class="st">"beige"</span>) <span class="sc">+</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> (map_data <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">substr</span>(tile, <span class="dv">1</span>, <span class="dv">4</span>) <span class="sc">==</span> <span class="st">"TILE"</span>)), <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> <span class="fu">st_as_sf</span>(<span class="fu">as.data.frame</span>(map_data) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(center <span class="sc">==</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> <span class="fu">select</span>(centroid)), <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> <span class="fu">st_as_sf</span>(<span class="fu">as.data.frame</span>(map_data) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(center <span class="sc">==</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> <span class="fu">select</span>(centroid)), <span class="at">color =</span> <span class="st">"white"</span>, <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"none"</span>,</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.line =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.border =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.background =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(tile_bg, <span class="at">filename =</span> <span class="st">"data/map/tilemap.png"</span>, <span class="at">width =</span> <span class="dv">2147</span>, <span class="at">height =</span> <span class="dv">2160</span>, <span class="at">units =</span> <span class="st">"px"</span>, <span class="at">dpi =</span> <span class="dv">320</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>province_bg <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> (map_data <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">substr</span>(tile, <span class="dv">1</span>, <span class="dv">3</span>) <span class="sc">==</span> <span class="st">"SEA"</span>)), <span class="at">fill =</span> <span class="st">"navy"</span>, <span class="at">color =</span> <span class="st">"navy"</span>) <span class="sc">+</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> (map_data <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">substr</span>(tile, <span class="dv">1</span>, <span class="dv">4</span>) <span class="sc">==</span> <span class="st">"TILE"</span>)), <span class="at">fill =</span> <span class="st">"beige"</span>, <span class="at">color =</span> <span class="st">"beige"</span>) <span class="sc">+</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> (map_data <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">substr</span>(tile, <span class="dv">1</span>, <span class="dv">4</span>) <span class="sc">==</span> <span class="st">"TILE"</span>) <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(ofProvince) <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="at">geometry =</span> <span class="fu">st_union</span>(geometry)) <span class="sc">%&gt;%</span> <span class="fu">st_remove_holes</span>()), <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> <span class="fu">st_as_sf</span>(<span class="fu">as.data.frame</span>(map_data) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(center <span class="sc">==</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> <span class="fu">select</span>(centroid)), <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> <span class="fu">st_as_sf</span>(<span class="fu">as.data.frame</span>(map_data) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(center <span class="sc">==</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> <span class="fu">select</span>(centroid)), <span class="at">color =</span> <span class="st">"white"</span>, <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"none"</span>,</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.line =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.border =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.background =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(province_bg, <span class="at">filename =</span> <span class="st">"data/map/provincemap.png"</span>, <span class="at">width =</span> <span class="dv">2147</span>, <span class="at">height =</span> <span class="dv">2160</span>, <span class="at">units =</span> <span class="st">"px"</span>, <span class="at">dpi =</span> <span class="dv">320</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
+<div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>region_bg <span class="ot">&lt;-</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> (map_data <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">substr</span>(tile, <span class="dv">1</span>, <span class="dv">3</span>) <span class="sc">==</span> <span class="st">"SEA"</span>)), <span class="at">fill =</span> <span class="st">"navy"</span>, <span class="at">color =</span> <span class="st">"navy"</span>) <span class="sc">+</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> (map_data <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">substr</span>(tile, <span class="dv">1</span>, <span class="dv">4</span>) <span class="sc">==</span> <span class="st">"TILE"</span>)), <span class="at">fill =</span> <span class="st">"beige"</span>, <span class="at">color =</span> <span class="st">"beige"</span>) <span class="sc">+</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> (map_data <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="fu">substr</span>(tile, <span class="dv">1</span>, <span class="dv">4</span>) <span class="sc">==</span> <span class="st">"TILE"</span>) <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(ofRegion) <span class="sc">%&gt;%</span> <span class="fu">summarize</span>(<span class="at">geometry =</span> <span class="fu">st_union</span>(geometry)) <span class="sc">%&gt;%</span> <span class="fu">st_remove_holes</span>()), <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> <span class="fu">st_as_sf</span>(<span class="fu">as.data.frame</span>(map_data) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(center <span class="sc">==</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> <span class="fu">select</span>(centroid)), <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="at">data =</span> <span class="fu">st_as_sf</span>(<span class="fu">as.data.frame</span>(map_data) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(center <span class="sc">==</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span> <span class="fu">select</span>(centroid)), <span class="at">color =</span> <span class="st">"white"</span>, <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"none"</span>,</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.line =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.major =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.border =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.background =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(region_bg, <span class="at">filename =</span> <span class="st">"data/map/regionmap.png"</span>, <span class="at">width =</span> <span class="dv">2147</span>, <span class="at">height =</span> <span class="dv">2160</span>, <span class="at">units =</span> <span class="st">"px"</span>, <span class="at">dpi =</span> <span class="dv">320</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<p>having background layers like this makes the map easier to manage once we start making it interactive.</p>
+</section>
+</section>
+<section id="interactivity" class="level1">
+<h1>Interactivity</h1>
+<p>This section assumes you already have your map, whether it is the one described above or another. It’s time to start clicking!</p>
+
+
+</section>
+
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../dev-wiki.html" class="pagination-link" aria-label="Development">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Development</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../about.html" class="pagination-link" aria-label="About">
+        <span class="nav-page-text">About</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+ ❤️ Chicanery, 2024
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/tinskoric/chicanery">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
+
+
+
+
+</body></html>

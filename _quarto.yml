@@ -5,9 +5,7 @@ website:
   title: "Chicanery"
   favicon: static/inverted_icon.png
   sidebar:
-    logo:
-      light: static/icon.png
-      dark: static/inverted_icon.png
+    logo: static/icon.png
     style: "docked"
     search: true
     contents:
@@ -47,6 +45,4 @@ format:
     html-table-processing: none
     grid:
       body-width: 1050px
-
-editor: visual
-
+    lightbox: true
